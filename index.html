@@ -5,12 +5,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <meta name="viewport" content="width=320,maximum-scale=1.1,user-scalable=no">
     <meta name="author" content="mengkun">
     <meta name="generator" content="KodCloud">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp">
-    <title>VirMach闪购实时监控</title>
+    <title>VirMach闪购历史数据</title>
     <!-- 不支持IE8及以下版本浏览器 -->
     <!--[if lte IE 8]>
         <script>
@@ -19,140 +19,107 @@
         </script>
     <![endif]-->
     <!-- font-awesome 图标字体 -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="//cdn.bootcdn.net/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" media="screen" rel="stylesheet" type="text/css">
     
     <!--load bootstrap.min.css-->
-    <link href="static_pack/Bootstrap-4-4.1.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="//cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- 核心样式文件 -->
     <link rel="stylesheet" href="static_pack/index.css">
-    
-    <style type="text/css">
-    	table {
-    		margin:0;
-    		padding:0;
-    		font-size:100%;
-    		vertical-align:baseline;
-    		background:transparent;
-    		font:12px/15px "Helvetica Neue",Arial, Helvetica, sans-serif;
-    		color: #555;
-    		background:#f5f5f5;
-    	}
-    	
-    	body {
-    		margin:0;
-    		padding:0;
-    	}
-    	
-    	a {color:#666;}
-    	
-    	/*
-    	Pretty Table Styling
-    	CSS Tricks also has a nice writeup: http://css-tricks.com/feature-table-design/
-    	*/
-    	
-    	table {
-    		overflow:hidden;
-    		border:1px solid #d3d3d3;
-    		background:#fefefe;
-    		width:70%;
-    		margin:5% auto 0;
-    		-moz-border-radius:5px; /* FF1+ */
-    		-webkit-border-radius:5px; /* Saf3-4 */
-    		border-radius:5px;
-    		-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-    		-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-    	}
-    	
-    	th, td {padding:18px 28px 18px; text-align:center; }
-    	
-    	th {padding-top:22px; text-shadow: 1px 1px 1px #fff; background:#e8eaeb;}
-    	
-    	td {border-top:1px solid #e0e0e0; border-right:1px solid #e0e0e0;}
-    	
-    	tr.odd-row td {background:#f6f6f6;}
-    	
-    	td.first, th.first {text-align:left}
-    	
-    	td.last {border-right:none;}
-    	
-    	/*
-    	Background gradients are completely unnecessary but a neat effect.
-    	*/
-    	
-    	td {
-    		background: -moz-linear-gradient(100% 25% 90deg, #fefefe, #f9f9f9);
-    		background: -webkit-gradient(linear, 0% 0%, 0% 25%, from(#f9f9f9), to(#fefefe));
-    	}
-    	
-    	tr.odd-row td {
-    		background: -moz-linear-gradient(100% 25% 90deg, #f6f6f6, #f1f1f1);
-    		background: -webkit-gradient(linear, 0% 0%, 0% 25%, from(#f1f1f1), to(#f6f6f6));
-    	}
-    	
-    	th {
-    		background: -moz-linear-gradient(100% 20% 90deg, #e8eaeb, #ededed);
-    		background: -webkit-gradient(linear, 0% 0%, 0% 20%, from(#ededed), to(#e8eaeb));
-    	}
-    	
-    	/*
-    	I know this is annoying, but we need additional styling so webkit will recognize rounded corners on background elements.
-    	Nice write up of this issue: http://www.onenaught.com/posts/266/css-inner-elements-breaking-border-radius
-    	
-    	And, since we've applied the background colors to td/th element because of IE, Gecko browsers also need it.
-    	*/
-    	
-    	tr:first-child th.first {
-    		-moz-border-radius-topleft:5px;
-    		-webkit-border-top-left-radius:5px; /* Saf3-4 */
-    	}
-    	
-    	tr:first-child th.last {
-    		-moz-border-radius-topright:5px;
-    		-webkit-border-top-right-radius:5px; /* Saf3-4 */
-    	}
-    	
-    	tr:last-child td.first {
-    		-moz-border-radius-bottomleft:5px;
-    		-webkit-border-bottom-left-radius:5px; /* Saf3-4 */
-    	}
-    	
-    	tr:last-child td.last {
-    		-moz-border-radius-bottomright:5px;
-    		-webkit-border-bottom-right-radius:5px; /* Saf3-4 */
-    	}
-        .dt-item-main{
-            width: 30%;
-            padding-left: 15px;
-            padding-right: 15px;
+    <style>
+        /*面板样式*/
+       .dt-panel{
+            border: 1px solid #d8c799;
+            background-color: #fff;
+            border-radius: 4px;
+            min-height: 450px;
+            margin: 0 20px 20px 20px;
+            margin-left: -15px;
+            margin-right: -15px;
+       }
+       /*面板标题*/
+       .dt-p-title{
+            font-size: 16px;
+            color: #616161;
+            border-bottom: 1px solid #f5f5f5;
+            padding: 15px 20px;
+            /*margin: 0 10px;*/
             position: relative;
-            margin: 0 auto;
+            z-index: 1;
+            background-image: linear-gradient(to right,#ffa7079c,#fb0471ba) !important;
+            text-shadow: 5px 1px black, 6px 2px white;
+            -webkit-text-fill-color: transparent;
+       }
+       /*灰色小圆点*/
+       .dt-p-title .dt-icon-more{
+            position: absolute;
+            right: 0;
+            top: 15px;
+            background-color: rgba(0,0,0,.3);
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: .5rem;
+            height: .5rem;
+            border-radius: .5rem;
+       }
+       /*绿色小圆点*/
+       .dt-p-title .dt-icon-more-online{
+            background-color: lime;
+       }
+        /*弹窗层*/
+        .dt-mainbg {
+            position: fixed;
+            left: 50%;
+            top: 60%;
+            margin-top: -300px;
+            margin-left: -145px;
+            width: 290px;
+            height: 400px;
+            z-index: 20;
+            padding: 20px 8px;
         }
-        /* 响应式优化 */
-        @media screen and (max-width: 1150px) {
-            .dt-item-main{
-                width: 30%;
-            }
+        /*弹窗层-关闭按钮*/
+        .dt-mainbg .dt-mainbg-close {
+            width: 34px;
+            height: 34px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            overflow: hidden;
+            z-index: 3;
+            cursor: pointer;
+            background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAABECAMAAADTNBe3AAAAaVBMVEUaGhoAAAAAAABjY2MAAAAaGhoAAAAaGhoAAAAODg4ODg4ODg5nZ2caGhpqampxcXFzc3NtbW0aGhoAAAAaGhoAAAAaGhoAAAAaGhoAAAAaGhoAAABoaGhFRUU/Pz88PDwyMjKZmZmCgoIXHPRbAAAAIXRSTlNmZgCwZF9fSEgkDQm3ZK62urJRUUBAMjImJhgYu4iIf3/u6Yu6AAABa0lEQVRIx42U6ZaCMAxGvyhlFVERZXFG4f0fcuooBMKS3l85Pfd0SZNgxyTl9WLS1FyuZbJjWKmDFExQz5Q4gCCIp0pkMMNEY+WGRW6ssCGdXomwSvRRYrOumPhfCbBB8FZqbFJbhTf5AYejbZAMOX12jz58dM8+TBOUGNh3h09w6Pa8WuIK4QjDChcIRxhWMBCOMKyQQjjCQOqi6Ae5XFd/9DR1j29yp6nTP0D/Rqdi0EtKL0y9vPUm0VtNb1i97efDA+vDQx9BrFRF7nuenxfVstKEHg14YTNT4pAEoZxSPs3wJ4++0yJ3VtiQTq9EtEo/pfx1xf8UQ0gbhG+loU0aq/Amv8ThaBskQ05f7akPT+1ryHOCigaO1vkaR16tUNDYyciSWYMpkJNwhEE5pkk5t+esPU9TA4+EIwzyXBR5UDY/SL/u0qNP4tF66lw+QP9GvRj0knIpTL289SbRW01vWL3t9eHhPoL+APHmHcW9VwK4AAAAAElFTkSuQmCC) no-repeat;
         }
-        @media screen and (max-width: 1000px) {
-            .dt-item-main{
-                width: 30%;
-            }
+        /*遮罩层*/
+        .dt-mask {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            filter: alpha(opacity=70);
+            opacity: .7;
+            z-index: 10;
+            display: none;
         }
-        @media screen and (max-width: 800px) {
-            .dt-item-main{
-                width: 60%;
-            }
+        .dt-mainbg-load{
+            color: white;
         }
-        @media screen and (max-width: 600px) {
-            .dt-item-main{
-                width: 100%;
-            }
+        .dt-mainbg-load2{
+            color: white;
+            padding: 40px;
         }
-        @media screen and (max-width: 400px) {
-            .dt-item-main{
-                width: 100%;
-            }
+        
+        .dt-silk-title{
+        	text-align:center;
+        	width:100%;
+        }
+        .dt-col{
+            width: 200px;
+            margin-top: 200px;
+            margin-left: 60%;
         }
     </style>
 </head>
@@ -170,17 +137,17 @@
         
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/index.html">实时监控 <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" onclick="setYear(2021)">2021年</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/2020.html">2020年</a>
+                    <a class="nav-link" href="#" onclick="setYear(2020)">2020年</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/2019.html">2019年</a>
+                    <a class="nav-link" href="#" onclick="setYear(2019)">2019年</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/2018.html">2018年</a>
+                    <a class="nav-link" href="#" onclick="setYear(2018)">2018年</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" target="_blank" href="http://0ddt.com/">零点资源</a>
@@ -201,270 +168,64 @@
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="输入关键字" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">查询</button>
+              <input class="form-control mr-sm-2" type="search" placeholder="输入需要查询的价格" aria-label="Search" id="keywords">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="search">查询</button>
             </form>
           </div>
       </div>
     </nav>
-    
+
     <div class="container">
         <section class="section">
-            <p class="dt-title-describe" style="color: white;line-height: 2px;"><span class="color1" style="padding: 4px 8px;">惊人折扣</span> |<span class="color2" style="padding: 4px 8px;">绝对超值</span> |<span class="color3" style="padding: 4px 8px;">超值</span> |<span class="color4" style="padding: 4px 8px;">一般</span> |<span class="color5" style="padding: 4px 8px;">便宜货</span> |<span class="color7" style="padding: 4px 8px;">高流量</span> |<span class="color8" style="padding: 4px 8px;">多IP</span> |<span class="color9" style="padding: 4px 8px;">多核心</span> |<span class="color10" style="padding: 4px 8px;">大内存</span> |<span class="color0" style="padding: 4px 8px;">不推荐</span>
-            </p>
             <a name="product">
             </a>
-            <h3 class="dt-sub-title">
-                2020年VirMach闪购实时监控
+            <h3 class="dt-sub-title" id="dt_sub_title">
+                VirMach闪购历史数据
             </h3>
             
-            <div class="dt-item-box" id="dt-item-box">
+            <p class="dt-title-describe" style="color: white;line-height: 30px;">
+                <span class="color1" style="padding: 4px 8px;">惊人折扣</span> |
+                <span class="color2" style="padding: 4px 8px;">绝对超值</span> |
+                <span class="color3" style="padding: 4px 8px;">超值</span> |
+                <span class="color4" style="padding: 4px 8px;">一般</span> |
+                <span class="color5" style="padding: 4px 8px;">便宜货</span> |
+                <span class="color7" style="padding: 4px 8px;">高流量</span> |
+                <span class="color8" style="padding: 4px 8px;">多IP</span> |
+                <span class="color9" style="padding: 4px 8px;">多核心</span> |
+                <span class="color10" style="padding: 4px 8px;">大内存</span> |
+                <span class="color0" style="padding: 4px 8px;">不推荐</span>
+            </p>
+            
+            <div class="dt-panel">
+                <h2 class="dt-p-title">最新闪购<i class="dt-icon-more" title="离线"></i></h2>
+                
+                <div class="dt-item-box" style="padding: 10px;margin-left: auto; margin-right: auto;width: 380px; height: 350px;" id="flashSales"></div>
+                <br><hr>
+                <div class="dt-item-box">
+                    <div style="text-align: center;"><i class="fa fa-spinner fa-spin fa-1x fa-fw" aria-hidden="true"></i> 后台持续监控，无需刷新...</div> 
+                </div>
+                <input type="hidden" id="planid" />
             </div>
-            <!-- dt-item-box -->
             
-            <div id="progressBar" class="dt-title-describe" style="text-align: center;">
-                <i class="fa fa-spinner fa-spin fa-1x fa-fw" aria-hidden="true"></i> 数据获取中，最新于 <span id="time"></span> 获取
-            </div> 
             
-            <table cellspacing="0">
-            	<tr>
-            		<th>
-            			区域
-            		</th>
-            		<th>
-            			测试IP
-            		</th>
-            		<th>
-            			100M文件
-            		</th>
-            		<th>
-            			Looking Glass
-            		</th>
-            	</tr>
-                <tr>
-                	<td>
-                		Frankfurt, DE
-                	</td>
-                	<td>
-                		50.3.68.2
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://ffm.lg.virmach.com/100MB.test">
-                			100MB
-                		</a>
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://ffm.lg.virmach.com">
-                			Looking Glass
-                		</a>
-            		</td>
-                </tr>
-                <tr>
-                	<td>
-                		Buffalo, NY
-                	</td>
-                	<td>
-                		192.227.227.194
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://ny.lg.virmach.com/100MB.test">
-                			100MB
-                		</a>
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://ny.lg.virmach.com">
-                			Looking Glass
-                		</a>
-            		</td>
-                </tr>
-                <tr>
-                	<td>
-                		Dallas, TX
-                	</td>
-                	<td>
-                		172.245.210.3
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://dal.lg.virmach.com/100MB.test">
-                			100MB
-                		</a>
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://dal.lg.virmach.com">
-                			Looking Glass
-                		</a>
-            		</td>
-                </tr>
-                <tr>
-                	<td>
-                		Los Angeles, CA
-                	</td>
-                	<td>
-                		107.172.246.38
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://la.lg.virmach.com/100MB.test">
-                			100MB
-                		</a>
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://la.lg.virmach.com">
-                			Looking Glass
-                		</a>
-            		</td>
-                </tr>
-                <tr>
-                	<td>
-                		Chicago, IL
-                	</td>
-                	<td>
-                		172.245.86.17
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://chi.lg.virmach.com/100MB.test">
-                			100MB
-                		</a>
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://chi.lg.virmach.com">
-                			Looking Glass
-                		</a>
-            		</td>
-                </tr>
-                <tr>
-                	<td>
-                		Phoenix, AZ
-                	</td>
-                	<td>
-                		173.213.69.188
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://phx.lg.virmach.com/100MB.test">
-                			100MB
-                		</a>
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://phx.lg.virmach.com">
-                			Looking Glass
-                		</a>
-            		</td>
-                </tr>
-                <tr>
-                	<td>
-                		Seattle, WA
-                	</td>
-                	<td>
-                		104.140.22.36
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://sea.lg.virmach.com/100MB.test">
-                			100MB
-                		</a>
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://sea.lg.virmach.com">
-                			Looking Glass
-                		</a>
-            		</td>
-                </tr>
-                <tr>
-                	<td>
-                		Atlanta, GA
-                	</td>
-                	<td>
-                		23.94.94.166
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://atl.lg.virmach.com/100MB.test">
-                			100MB
-                		</a>
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://atl.lg.virmach.com">
-                			Looking Glass
-                		</a>
-            		</td>
-                </tr>
-                <tr>
-                	<td>
-                		San Jose, CA
-                	</td>
-                	<td>
-                		107.172.103.185
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://sj.lg.virmach.com/100MB.test">
-                			100MB
-                		</a>
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://sj.lg.virmach.com">
-                			Looking Glass
-                		</a>
-            		</td>
-                </tr>
-                <tr>
-                	<td>
-                		Los Angeles, CA
-                	</td>
-                	<td>
-                	    45.43.7.43
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://filtered-la.lg.virmach.com/100MB.test">
-                			100MB
-                		</a>
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://filtered-la.lg.virmach.com">
-                			Looking Glass
-                		</a>
-            		</td>
-                </tr>
-                <tr>
-                	<td>
-                		Piscataway, NJ
-                	</td>
-                	<td>
-                	    198.46.189.4
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://nj.lg.virmach.com/100MB.test">
-                			100MB
-                		</a>
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://nj.lg.virmach.com">
-                			Looking Glass
-                		</a>
-            		</td>
-                </tr>
-                <tr>
-                	<td>
-                		Amsterdam, NL
-                	</td>
-                	<td>
-                		104.206.240.6
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://ams.lg.virmach.com/100MB.test">
-                			100MB
-                		</a>
-                	</td>
-                	<td>
-                		<a target="_blank" href="http://ams.lg.virmach.com">
-                			Looking Glass
-                		</a>
-            		</td>
-                </tr>
-            </table>
+            <div class="dt-panel">
+                <h2 class="dt-p-title">历史闪购</h2>
+                
+                <div class="dt-item-box" style="padding: 10px;">
+                    <div id="dt_item_box"></div>
+                </div>
+                <!-- dt-item-box -->
+                <div class="dt-item-box" id="dt_item_box_table" >
+                    <div id="load" style="text-align: center;"><i class="fa fa-spinner fa-spin fa-1x fa-fw" aria-hidden="true"></i> 数据加载中，请稍等...</div> 
+                </div>
+            </div>
+            <!-- dt-item-box-table -->
         </section>
         <!-- class="section" -->
     </div>
     <!-- class=container -->
     
-    
-    <footer class="footer" style="position: absolute; width: 100%;">
+    <footer class="footer">
         <div class="count">
             『您是本站第
             <img src="//www.amazingcounters.com/counter.php?i=3216768&c=9650617" />
@@ -479,183 +240,372 @@
             <img src="/static_pack/images/aq/zfb.png" width="80"> 
         </div>
         <div class="web-record">
-            Copyright © 2018-2020 
+            Copyright © 2018-2021 
             <a href="http://www.0ddt.com/" target="_blank" rel="nofollow">
-                段彤网络
+                零点网络
             </a>. All Rights Reserved
         </div>
     </footer>
     <!-- 返回顶部 -->
-    <div class="dt-uptop" title="点击返回顶部">
-    </div>
+    <div class="dt-uptop" title="点击返回顶部"></div>
+    <!--生成图片-->
+    <div class="dt-mainbg" style="display: none;"> <span class="dt-mainbg-close"></span> <img src="#" alt="右键-另存为..." /> <span class="dt-mainbg-load">正在生成分享图，请稍后...</span> <span class="dt-mainbg-load2">温馨提示：右键可下载图片</span> </div>
+    <!--遮罩层-->
+    <div class="dt-mask" style="display: none;"></div>
+    <!--运动的小恐龙-->
+    <div class="animation_box"><img src="/static_pack/images/dinosaur.gif" class="animation_img"></div>
     <!--load jquery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <!--load bootstrap.min.js-->
-    <script src="static_pack/Bootstrap-4-4.1.1/js/bootstrap.min.js"></script>
-    <!--load pagination.js-->
-    <script src="static_pack/pagination/pagination.js"></script>
-    
+    <script src="//cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <!--load html2canvas.min.js-->
+    <script src="//cdn.bootcdn.net/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
     <script>
-        var ver = 0;
-        var json_temp = {};
+        var pageIndex = 1;     //页面索引初始值   
+        var pageSize = 8;     //每页显示条数初始化，修改显示条数，修改这里即可   
+        var isLoading = true;     //防止多次加载数据
+        var year = 2021;
+        var serverUrl = 'http://api.virmach.me/api_2021.php';
+		var lockReconnect = false; //避免重复连接
+		var ws = null; //WebSocket的引用
+		var wsUrl = "107.172.145.241:8080"; //这个要与后端提供的相同
+		var isFlashSalesData=true;
+        //初始化
         $(function() {
-    		/* For zebra striping */
-            $("table tr:nth-child(odd)").addClass("odd-row");
-    		/* For cell text alignment */
-    		$("table td:first-child, table th:first-child").addClass("first");
-    		/* For removing the last border */
-    		$("table td:last-child, table th:last-child").addClass("last");
-    		run();
-        });
-        function run(){
-            $.ajax({
-                type: "GET",  
-                dataType: "json",  
-                timeout: 5000,
-                url: "/new.json?_" + new Date().getTime(),      //提交到一般处理程序请求数据
-                success: function(data) {
-                    setData(data);
-                },
-                complete: function(x,t){
-                    setTimeout(function(){
-                        run();
-                    },3000);
+            //初始化数据
+            setYear(2021);
+            
+            //初始化websocket
+		    createWebSocket(wsUrl);
+            
+            // 监听滚动变化
+            $(window).scroll(function() {
+                if ($(window).scrollTop() < 300) {
+                    $(".dt-uptop").removeClass("show");
+                } else {
+                    $(".dt-uptop").addClass("show");
                 }
-            }); 
+            });
+            
+            // 返回顶部
+            $(".dt-uptop").click(function() {
+                $("html, body").animate({
+                    scrollTop: 0
+                },
+                "normal");
+                return false;
+            });
+            
+            //查询
+            $("#search").click(function(){
+                pageIndex = 1;
+                $("#dt_item_box").html('');
+                $("#load").html('<i class="fa fa-spinner fa-spin fa-1x fa-fw" aria-hidden="true"></i> 数据加载中，请稍等...');
+                getdata();
+            })
+            
+                        
+            //按需加载
+            $(window).scroll(function () {
+                var scrollTop = $(this).scrollTop();
+                var scrollHeight = $(document).height();
+                var windowHeight = $(this).height();
+                if (scrollTop + windowHeight == scrollHeight) {
+                    if(isLoading){
+                        isLoading = false;
+                        pageIndex++;
+                        getdata();
+                　　}
+                }
+            });
+            
+            //更改年份
+            $(".nav-link").click(function(){
+                //修改选中样式
+                $(".nav-link").each(function(){
+                    $(this).removeClass("active");
+                })
+                $(this).addClass("active");
+                
+            })
+            
+            //弹窗层-关闭按钮
+            $(".dt-mainbg-close").click(function(){
+                $(".dt-mask").hide();
+                $(".dt-mainbg").hide();
+            })
+            
+        });
+        
+        //更改年份
+        function setYear(y){
+            $("title").text(y + '年VirMach闪购历史数据');
+            $("#dt_sub_title").text(y + '年VirMach闪购历史数据');
+            
+            $("#load").html('<i class="fa fa-spinner fa-spin fa-1x fa-fw" aria-hidden="true"></i> 数据加载中，请稍等...');
+            year = y;
+            pageIndex = 1;
+            $("#dt_item_box").html('');
+            getdata();
         }
-        function setData(data){
-            $("#time").text(curentTime());
-            if(ver > 0 && ver != data.ver){
-                location.reload();
+        
+        //获取数据
+        function getdata(){
+            var keywords = $("#keywords").val();
+            try{
+                $.ajax({
+                    type: "GET",  
+                    dataType: "json", 
+                    timeout: 5000,
+                    url: serverUrl,      //提交到一般处理程序请求数据
+                    data: {pageIndex: pageIndex, pageSize: pageSize, year:year, keywords: keywords, time: new Date().getTime()},
+                    beforeSend:function(){
+                        //显示正在加载数据
+                        $("#dt_item_box_table").show();
+                    },
+                    success: function(result) {
+                        if(Math.ceil(result.total / pageSize) < pageIndex){
+                            $("#load").html('数据已经全部加载了...');
+                        }else{
+                            $("#dt_item_box_table").hide();
+                            for(var i = 0;i < result.data.length;i++){
+                                
+                                $("#dt_item_box").append(setHmtl(result.data[i]));
+                            }
+                            if(result.data.length > 0 && isFlashSalesData){
+                                isFlashSalesData = false;
+                                $("#flashSales").html(setHmtl(result.data[0], true));
+                            }
+                        }
+                    },
+                    complete: function(x,t){
+                        isLoading = true;
+                    }
+                }); 
+            }catch(ex){
+            	console.log(ex)
             }
-    	   // if(json_temp != data)
-    	    {
-                json_temp = data;
-        	    var html = setHmtl(data);
-                $("#dt-item-box").html(html);
-    	    }
-    	    ver = data.ver;
         }
-        function setHmtl(data){
+        
+        //设置列表html
+        function setHmtl(item, isSales=false){
             var html='';
-            if(!data.ended){
-                text2audio("嘤嘤嘤！监控提醒您，当前主鸡，" + data.discount.text + "," + data.price + "刀," + data.location);
-            }
-            html +='<div class="dt-item-main">';
+            if(isSales){
+            html +='<div class="dt-item" style="width: 100%">';
             html +='    <a href="https://billing.virmach.com/aff.php?aff=8971&pid=0179&billingcycle=annually" target="_blank">';
-            html +='        <article class="dt-color-item dt-color-item-bg color'+ data.discount.rank +' Discounts'+ data.discount.rank +'">';
-            html +='            <span class="dt-silk"><h3>$'+ data.price+' /年</h3></span>';
+            }else{
+            html +='<div class="dt-item" onclick="CreateImage(this)">';
+            }
+            html +='        <article class="dt-color-item dt-color-item-bg color'+ item.discount_rank +' Discounts'+ item.discount_rank +'">';
+            html +='            <span class="dt-silk"><h3>$'+ item.price+' /年</h3></span>';
             html +='             <ul class="dt-item-ul">';
-            html +='                <li class="msg" title="' + data.virt + '–' + data.message + '">';
-            html +='                    <img alt="VIRTUALIZATION" src="/static_pack/images/3d.png">';
-            html +='                    <span>';
-            html +='                        ' + data.virt + '–' + data.message + '';
-            html +='                    </span>';
-            html +='                </li>';
-            html +='                <li class="msg" title="Windows ' + data.windows + '">';
-            html +='                    <img alt="WINDOWS" src="/static_pack/images/windows.png" >';
-            html +='                    <strong>';
-            html +='                        Windows';
-            html +='                    </strong> ';
-            html +=                     data.windows;
-            html +='                </li>';
-            html +='                <li class="msg" title="' + data.ram + ' MB内存">';
-            html +='                    <img alt="RAM" src="/static_pack/images/ram.png">';
-            html +='                    <strong>';
-            html +='                        ' + data.ram + '';
-            html +='                    </strong>';
-            html +='                    MB内存';
-            html +='                </li>';
-            html +='                <li class="msg" title="' + data.cpu + 'x 核心">';
+            html +='                <li class="msg" title="' + item.cpu + 'x 核心">';
             html +='                    <img alt="CPU" src="/static_pack/images/cpu.png">';
             html +='                    <strong>';
-            html +='                        ' + data.cpu + 'x';
+            html +='                        ' + item.cpu + 'x';
             html +='                    </strong>';
             html +='                    核心';
             html +='                </li>';
-            html +='                <li class="msg" title="' + data.hdd + ' GB硬盘">';
+            html +='                <li class="msg" title="' + item.ram + ' MB内存">';
+            html +='                    <img alt="RAM" src="/static_pack/images/ram.png">';
+            html +='                    <strong>';
+            html +='                        ' + item.ram + '';
+            html +='                    </strong>';
+            html +='                    MB内存';
+            html +='                </li>';
+            html +='                <li class="msg" title="' + item.hdd + ' GB硬盘">';
             html +='                    <img alt="HDD" src="/static_pack/images/disk.png">';
             html +='                    <strong>';
-            html +='                        ' + data.hdd + '';
+            html +='                        ' + item.hdd + '';
             html +='                    </strong>';
             html +='                    GB硬盘';
             html +='                </li>';
-            html +='                <li class="msg" title="' + data.bw + ' GB流量">';
+            html +='                <li class="msg" title="' + item.bw + ' GB流量">';
             html +='                    <img alt="BANDWIDTH" src="/static_pack/images/network.png">';
             html +='                    <strong>';
-            html +='                        ' + data.bw + '';
+            html +='                        ' + item.bw + '';
             html +='                    </strong>';
             html +='                    GB流量';
             html +='                </li>';
-            html +='                <li class="msg" title="' + data.ips + ' 独享IPv4">';
+            html +='                <li class="msg" title="' + item.ips + ' 独享IPv4">';
             html +='                    <img alt="IPs" src="/static_pack/images/ip.png">';
             html +='                    <strong>';
-            html +='                        ' + data.ips + '';
+            html +='                        ' + item.ips + '';
             html +='                    </strong>';
             html +='                    独享IPv4';
             html +='                </li>';
-            html +='                <li class="msg" title="' + data.location + '">';
+            html +='                <li class="msg" title="' + unescape(item.location) + '">';
             html +='                    <img alt="LOCATION" src="/static_pack/images/server.png">';
             html +='                    <strong>';
-            html +='                        ' + data.location + '';
+            html +='                        ' + unescape(item.location) + '';
             html +='                    </strong>';
             html +='                </li>';
-            html +='                <li class="msg" title="' + data.datetime + '">';
+            html +='                <li class="msg" title="Windows ' + item.windows+ '">';
+            html +='                    <img alt="WINDOWS" src="/static_pack/images/windows.png" >';
+            html +='                    <strong>';
+            html +='                        Windows';
+            html +='                    </strong>';
+            html +=                     item.windows;
+            html +='                </li>';
+            html +='                <li class="msg" title="' + timestampToTime(item.time) + '">';
             html +='                    <img alt="Date" src="/static_pack/images/time.png">';
             html +='                    <strong>';
-            html +='                        ' + data.datetime + '';
+            html +='                        ' + timestampToTime(item.time) + '';
             html +='                    </strong>';
             html +='                </li>';
             html +='            </ul>';
-            html +=                 data.ended ? '<div class="nowaterbtn">立即下单</div>':'<div class="nowaterbtn blue_btn">已售罄，即将刷新</div>';
+            if(isSales){
+            html +=             '<div class="nowaterbtn">立即购买</div>';
+            // html +=             '<div class="nowaterbtn blue_btn">已售罄</div>';
+            }
             html +='            <i class="light"></i>';
             html +='        </article>';
+            if(isSales){
             html +='    </a>';
+            }
             html +='</div>';
             html +='<!-- dt-item -->';
             return html;
         }
-        function text2audio(zhText) {
-        	zhText = encodeURI(zhText);
-        	var audio= new Audio("http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text="+ zhText);//这里的路径写上mp3文件在项目中的绝对路径
-        	audio.play();//播放
+        
+        //时间戳格式化
+        function timestampToTime(timestamp) {
+            var date = new Date(parseInt(timestamp));//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+            var Y = date.getFullYear() + '-';
+            var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1):date.getMonth()+1) + '-';
+            var D = (date.getDate()< 10 ? '0'+date.getDate():date.getDate())+ ' ';
+            var h = (date.getHours() < 10 ? '0'+date.getHours():date.getHours())+ ':';
+            var m = (date.getMinutes() < 10 ? '0'+date.getMinutes():date.getMinutes()) + ':';
+            var s = date.getSeconds() < 10 ? '0'+date.getSeconds():date.getSeconds();
+            return Y+M+D+h+m+s;
         }
-        function curentTime() {
-            var now = new Date();
-    
-            var year = now.getFullYear();       //年
-            var month = now.getMonth() + 1;     //月
-            var day = now.getDate();            //日
-    
-            var hh = now.getHours();            //时
-            var mm = now.getMinutes();          //分
-            var ss = now.getSeconds();          //分
-    
-            var clock = year + "-";
-    
-            if(month < 10)
-                clock += "0";
-    
-            clock += month + "-";
-    
-            if(day < 10)
-                clock += "0";
-    
-            clock += day + " ";
-    
-            if(hh < 10)
-                clock += "0";
-    
-            clock += hh + ":";
-            if (mm < 10)
-                clock += '0';
-            clock += mm + ":";
-    
-            if (ss < 10)
-                clock += '0';
-            clock += ss;
-            return clock;
+        
+        //创建分享图
+        function CreateImage(_this) {
+            $(".dt-mask").show();
+            $(".dt-mainbg").show();
+            $(".dt-mainbg img").hide();
+            $(".dt-mainbg-load").show();
+            $(".dt-mainbg-load2").hide();
+            html2canvas($(_this), {
+                onrendered: function (canvas) {
+                    var dataUrl = canvas.toDataURL();
+                    console.log(dataUrl);
+                    $(".dt-mainbg img").attr("src", dataUrl);
+                    $(".dt-mainbg img").show();
+                    $(".dt-mainbg-load").hide();
+                    $(".dt-mainbg-load2").show();
+                }
+            });
         }
+        
+        //设置闪购信息展示
+        function setSales(data){
+            if(data['planid'] != null && data['planid'] != undefined && data['planid'] != $("#planid").val()){
+                $("#planid").val(data['planid']);
+                $("#flashSales").html(setHmtl(data, true));
+                $("#dt_item_box").prepend(setHmtl(data));
+            }
+        }
+        
+        //创建WebSocket连接
+		/***************初始化开始**********************/
+		function createWebSocket(url) {
+			try {
+				ws = new WebSocket("ws://" + url + "/ws");
+				initEventHandle();
+			} catch(e) {
+				reconnect(wsUrl);
+			}
+		}
+
+		function reconnect(url) {
+			if (lockReconnect) return;
+			lockReconnect = true;
+			//没连接上会一直重连，设置延迟避免请求过多
+			setTimeout(function() {
+				createWebSocket(wsUrl);
+				console.log("正在重连，当前时间" , new Date()) 
+				lockReconnect = false;
+			},
+			5000); //这里设置重连间隔(ms)
+		}
+		
+		function initEventHandle() {
+			// 连接成功建立后响应
+			ws.onopen = function() {
+        	    writeToScreen("在线");
+        	    $('.dt-icon-more').removeClass('dt-icon-more-online');
+        	    $('.dt-icon-more').addClass('dt-icon-more-online');
+				//心跳检测重置
+				heartCheck.reset().start();
+			}
+			// 收到服务器消息后响应
+			ws.onmessage = function(e) {
+				//如果获取到消息，心跳检测重置
+				//拿到任何消息都说明当前连接是正常的
+				heartCheck.reset().start();
+				if (e.data == "HeartBeat") {
+					//忽略心跳的信息，因为只要有消息进来，断线重连就会重置不会触发
+				} else {
+					//处理消息的业务逻辑
+                    var data = JSON.parse(e.data);
+                    setSales(data);
+				}
+			}
+
+			// 连接关闭后响应
+			ws.onclose = function() {
+        	    $('.dt-icon-more').removeClass('dt-icon-more-online');
+                writeToScreen("离线");
+				console.log("关闭连接");
+				reconnect(wsUrl); //重连
+			}
+			ws.onerror = function() {
+        	    $('.dt-icon-more').removeClass('dt-icon-more-online');
+                writeToScreen("离线");
+				reconnect(wsUrl); //重连
+			};
+		}
+		
+        //websocket记录
+        function writeToScreen(message) {
+            $('.dt-icon-more').attr("title", message)
+            console.log(message)
+        }
+		
+		//心跳检测
+		var heartCheck = {
+			timeout: 15000,
+			//毫秒
+			timeoutObj: null,
+			serverTimeoutObj: null,
+			reset: function() {
+				clearTimeout(this.timeoutObj);
+				clearTimeout(this.serverTimeoutObj);
+				return this;
+			},
+			start: function() {
+				var self = this;
+				this.timeoutObj = setTimeout(function() {
+					//这里发送一个心跳，后端收到后，返回一个心跳消息，
+					//onmessage拿到返回的心跳就说明连接正常
+					ws.send("HeartBeat");
+					console.log("HeartBeat");
+					self.serverTimeoutObj = setTimeout(function() { //如果超过一定时间还没重置，说明后端主动断开了
+						ws.close(); //如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+					},
+					self.timeout)
+				},
+				this.timeout)
+			}
+		}
+
+		// 强制退出
+		window.onunload = function() {
+			ws.close();
+		}
+		/***************初始化结束***********************/
     </script>
 </body>
 
