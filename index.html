@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -228,7 +227,7 @@
     <footer class="footer">
         <div class="count">
             『您是本站第
-            <img src="//www.amazingcounters.com/counter.php?i=3216768&c=9650617" />
+            <img src="/tj" />
             位访客』
         </div>
         <div class="social">
@@ -265,10 +264,10 @@
         var pageSize = 8;     //每页显示条数初始化，修改显示条数，修改这里即可   
         var isLoading = true;     //防止多次加载数据
         var year = 2021;
-        var serverUrl = 'http://api.virmach.me/api_2021.php';
+        var serverUrl = '//api.virmach.me/api_2021.php';
 		var lockReconnect = false; //避免重复连接
 		var ws = null; //WebSocket的引用
-		var wsUrl = "107.172.145.241:8080"; //这个要与后端提供的相同
+		var wsUrl = "api.virmach.me/socket"; //这个要与后端提供的相同
 		var isFlashSalesData=true;
         //初始化
         $(function() {
@@ -512,7 +511,7 @@
 		/***************初始化开始**********************/
 		function createWebSocket(url) {
 			try {
-				ws = new WebSocket("ws://" + url + "/ws");
+				ws = new WebSocket("wss://" + url);
 				initEventHandle();
 			} catch(e) {
 				reconnect(wsUrl);
