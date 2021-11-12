@@ -546,10 +546,12 @@
 				heartCheck.reset().start();
 				if (e.data == "HeartBeat") {
 					//忽略心跳的信息，因为只要有消息进来，断线重连就会重置不会触发
+				} else if(e.data == "version"){
+					window.location.href="/?_=" + new Date().getTime();
 				} else {
 					//处理消息的业务逻辑
-                    var data = JSON.parse(e.data);
-                    setSales(data);
+					var data = JSON.parse(e.data);
+					setSales(data);
 				}
 			}
 
