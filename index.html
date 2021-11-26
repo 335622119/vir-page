@@ -517,14 +517,14 @@
         var version="0.1";
         function getJsonBF(){
             try{
-                $.
+                $.ajax({
                     type: "GET",  
                     dataType: "json", 
                     timeout: 5000,
                     url: serverUrl + "/api_2021.php",      //提交到一般处理程序请求数据
                     data: {new:"new",  time: new Date().getTime()},
                     success: function(result) {
-                        var e = JSON.parse(result;
+                        var e = JSON.parse(result);
                         if(e.version != version){
                 			window.location.href="/?_=" + new Date().getTime();
                 		} else {
