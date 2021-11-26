@@ -454,8 +454,11 @@
             html +='                </li>';
             html +='            </ul>';
             if(isSales){
-            html +=             '<div class="nowaterbtn">立即购买</div>';
-            // html +=             '<div class="nowaterbtn blue_btn">已售罄</div>';
+            	if(item.ended){
+            		html +=             '<div class="nowaterbtn blue_btn">已售罄</div>';
+	    	}else{
+            		html +=             '<div class="nowaterbtn">立即购买</div>';
+		}
             }
             html +='            <i class="light"></i>';
             html +='        </article>';
