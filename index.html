@@ -265,6 +265,8 @@
         var pageSize = 8;     //每页显示条数初始化，修改显示条数，修改这里即可   
         var isLoading = true;     //防止多次加载数据
         var year = 2021;
+	    
+        var serverUrl = '//api.virmach.me/';
 		var lockReconnect = false; //避免重复连接
 		var ws = null; //WebSocket的引用
 // 		var wsUrl = "ws://" + document.domain + "/ws"; //这个要与后端提供的相同
@@ -355,7 +357,7 @@
                     type: "GET",  
                     dataType: "json", 
                     timeout: 5000,
-                    url: "api.virmach.me/api_2021.php",      //提交到一般处理程序请求数据
+                    url: serverUrl + "/api_2021.php",      //提交到一般处理程序请求数据
                     data: {pageIndex: pageIndex, pageSize: pageSize, year:year, keywords: keywords, time: new Date().getTime()},
                     beforeSend:function(){
                         //显示正在加载数据
@@ -521,7 +523,7 @@
                     type: "GET",  
                     dataType: "text", 
                     timeout: 5000,
-                    url: "api.virmach.me/new.json",      //提交到一般处理程序请求数据
+                    url: serverUrl + "/new.json",      //提交到一般处理程序请求数据
                     data: {time: new Date().getTime()},
                     success: function(result) {
                         var e = JSON.parse(result);
