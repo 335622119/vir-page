@@ -523,8 +523,8 @@
                     type: "GET",  
                     dataType: "text", 
                     timeout: 5000,
-                    url: serverUrl + "/new.json",      //提交到一般处理程序请求数据
-                    data: {time: new Date().getTime()},
+                    url: serverUrl + "/api_2021.php",      //提交到一般处理程序请求数据
+                    data: {new: new Date().getTime()},
                     success: function(result) {
                         var e = JSON.parse(result);
                         if(e.version != version && is_version){
