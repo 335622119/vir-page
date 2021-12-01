@@ -374,7 +374,8 @@ img {border: none;}
     background-color: DarkGray!important;
 }
 .color1 {
-    background-color: Orange!important;
+    background-color: Red!important;
+    /*background-color: Orange!important;*/
 }
 .color2 {
     background-color: SandyBrown!important;
