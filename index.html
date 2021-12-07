@@ -33,9 +33,9 @@
             background-color: #fff;
             border-radius: 4px;
             min-height: 450px;
-            margin: 0 20px 20px 20px;
+            /*margin: 0 20px 20px 20px;
             margin-left: -15px;
-            margin-right: -15px;
+            margin-right: -15px;*/
        }
        /*面板标题*/
        .dt-p-title{
@@ -196,7 +196,7 @@
                 <span class="color0" style="padding: 4px 8px;">不推荐</span>
             </p>
             
-            <div class="dt-panel">
+            <div class="dt-panel" style="display: none;">
                 <h2 class="dt-p-title">最新闪购<i class="dt-icon-more" title="离线"></i></h2>
                 
                 <div class="dt-item-box" style="padding: 10px;margin-left: auto; margin-right: auto;width: 380px; height: 350px;" id="flashSales"></div>
@@ -275,7 +275,7 @@
             //初始化数据
             setYear(2021);
             //开启闪购
-            getJsonBF();
+            //getJsonBF();
             
             // 监听滚动变化
             $(window).scroll(function() {
