@@ -167,10 +167,10 @@
                     </div>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="输入需要查询的价格" aria-label="Search" id="keywords">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="search">查询</button>
-            </form>
+            <!--<form class="form-inline my-2 my-lg-0">-->
+            <!--  <input class="form-control mr-sm-2" type="search" placeholder="输入需要查询的价格" aria-label="Search" id="keywords">-->
+            <!--  <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="search">查询</button>-->
+            <!--</form>-->
           </div>
       </div>
     </nav>
@@ -226,11 +226,11 @@
     <!-- class=container -->
     
     <footer class="footer">
-        <div class="count">
-            『您是本站第
-            <img src="//api.virmach.me//tj" />
-            位访客』
-        </div>
+        <!--<div class="count">-->
+        <!--    『您是本站第-->
+        <!--    <img src="//api.virmach.me//tj" />-->
+        <!--    位访客』-->
+        <!--</div>-->
         <div class="social">
             <img src="/static_pack/images/aq/txy.png" width="80"> 
             <img src="/static_pack/images/aq/360.png" width="80"> 
@@ -270,6 +270,9 @@
 		var ws = null; //WebSocket的引用
 // 		var wsUrl = "ws://" + document.domain + "/ws"; //这个要与后端提供的相同
 		var isFlashSalesData=true;
+		
+		//总数据
+		var data=[];
         //初始化
         $(function() {
             //初始化数据
@@ -345,45 +348,71 @@
             year = y;
             pageIndex = 1;
             $("#dt_item_box").html('');
-            getdata();
+            // var url="data/" + year + ".json?_=" + new Date().getTime();
+            var url="data/" + year + ".json";
+            //显示正在加载数据
+            $("#dt_item_box_table").show();
+            $.getJSON(url, function(res){
+                data = res;
+                getdata();
+            });
+            
         }
         
         //获取数据
         function getdata(){
-            var keywords = $("#keywords").val();
-            try{
-                $.ajax({
-                    type: "GET",  
-                    dataType: "json", 
-                    timeout: 5000,
-                    url: serverUrl + "/api_2021.php",      //提交到一般处理程序请求数据
-                    data: {pageIndex: pageIndex, pageSize: pageSize, year:year, keywords: keywords, time: new Date().getTime()},
-                    beforeSend:function(){
-                        //显示正在加载数据
-                        $("#dt_item_box_table").show();
-                    },
-                    success: function(result) {
-                        if(Math.ceil(result.total / pageSize) < pageIndex){
-                            $("#load").html('数据已经全部加载了...');
-                        }else{
-                            $("#dt_item_box_table").hide();
-                            for(var i = 0;i < result.data.length;i++){
-                                
-                                $("#dt_item_box").append(setHmtl(result.data[i]));
-                            }
-                            // if(result.data.length > 0 && isFlashSalesData){
-                            //     isFlashSalesData = false;
-                            //     $("#flashSales").html(setHmtl(result.data[0], true));
-                            // }
-                        }
-                    },
-                    complete: function(x,t){
-                        isLoading = true;
-                    }
-                }); 
-            }catch(ex){
-            	console.log(ex)
+            
+            //显示正在加载数据
+            $("#dt_item_box_table").show();
+            
+            
+            if(Math.ceil(data.total / pageSize) < pageIndex){
+                $("#load").html('数据已经全部加载了...');
+            }else{
+                $("#dt_item_box_table").hide();
+                var result = data.data.slice((pageIndex - 1) * pageSize, (pageIndex - 1) * pageSize + pageSize);
+                for(var i = 0;i < result.length;i++){
+                    $("#dt_item_box").append(setHmtl(result[i]));
+                }
             }
+            isLoading = true;
+            
+            
+            // var keywords = $("#keywords").val();
+            // try{
+            //     $.ajax({
+            //         type: "GET",  
+            //         dataType: "json", 
+            //         timeout: 5000,
+            //         url: serverUrl + "/api_2021.php",      //提交到一般处理程序请求数据
+            //         data: {pageIndex: pageIndex, pageSize: pageSize, year:year, keywords: keywords, time: new Date().getTime()},
+            //         beforeSend:function(){
+            //             //显示正在加载数据
+            //             $("#dt_item_box_table").show();
+            //         },
+            //         success: function(result) {
+                        
+            //             if(Math.ceil(result.total / pageSize) < pageIndex){
+            //                 $("#load").html('数据已经全部加载了...');
+            //             }else{
+            //                 $("#dt_item_box_table").hide();
+            //                 for(var i = 0;i < result.data.length;i++){
+                                
+            //                     $("#dt_item_box").append(setHmtl(result.data[i]));
+            //                 }
+            //                 // if(result.data.length > 0 && isFlashSalesData){
+            //                 //     isFlashSalesData = false;
+            //                 //     $("#flashSales").html(setHmtl(result.data[0], true));
+            //                 // }
+            //             }
+            //         },
+            //         complete: function(x,t){
+            //             isLoading = true;
+            //         }
+            //     }); 
+            // }catch(ex){
+            // 	console.log(ex)
+            // }
         }
         
         //设置列表html
