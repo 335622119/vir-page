@@ -221,6 +221,10 @@ img {border: none;}
     .dt-item {
         width: 50%;
     }
+    /*显示底部运动动画*/
+    .animation_box{
+        display: block;
+    }
 }
 @media screen and (max-width: 800px) {
     .container {
@@ -235,6 +239,10 @@ img {border: none;}
     .dt-title-describe{
         line-height: 40px !important;
     }
+    /*显示底部运动动画*/
+    .animation_box{
+        display: block;
+    }
 }
 @media screen and (max-width: 600px) {
     .container {
@@ -247,6 +255,10 @@ img {border: none;}
     .dt-color-item-bg {
         background-size: 60% 100%;
     }
+    /*隐藏底部运动动画*/
+    .animation_box{
+        display: none;
+    }
 }
 @media screen and (max-width: 400px) {
     .container {
@@ -258,6 +270,10 @@ img {border: none;}
     }
     .dt-color-item-bg {
         background-size: 100% 100%;
+    }
+    /*隐藏底部运动动画*/
+    .animation_box{
+        display: none;
     }
 }
 
